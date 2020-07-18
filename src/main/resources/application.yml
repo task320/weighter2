@@ -1,0 +1,8 @@
+micronaut:
+  application:
+    name: weighter
+    security:
+      authentication: session
+      redirect:
+        login-success: /
+        login-failure: /login/authFailed
