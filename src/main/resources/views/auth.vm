@@ -1,32 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    #if( $errors )
-    <title>Login Failed</title>
-    #else
-    <title>Login</title>
-    #end
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="/static/css/WeighterCommonCSS.css" type="text/css" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="/static/js/materialize.js"></script>
+	<title>ログイン</title>
 </head>
 <body>
-<form action="/login" method="POST">
-    <ol>
-        <li>
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username"/>
-        </li>
-        <li>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password"/>
-        </li>
-        <li>
-            <input type="submit" value="Login"/>
-        </li>
-        #if( $errors )
-        <li id="errors">
-            <span style="color: red;">Login Failed</span>
-        </li>
-        #end
-    </ol>
-</form>
+	<nav>
+	  <div class="nav-wrapper">
+	    <div class="brand-logo center">Weighter</div>
+	  </div>
+	</nav>
+	<div class="row center title-margin">
+		<div class="col s12 m8 offset-m2 l6 offset-l3">
+			<div class="card z-depth-2 grey lighten-4">
+				<div class="card-content">
+					<h5>ユーザーID・パスワードを入力してください</h5>
+					<form action="/login" method="POST">
+						<div class="row">
+							<div class="input-field input-text-style col s12 m8 offset-m2 l6 offset-l3">
+								<input class="validate input-font-32px center" type="text" name="username" id="username" size="30" />
+								<label for="username" class="input-label">ユーザーID</label>
+							</div>
+						</div>
+							<div class="row">
+								<div class="input-field col s12 m8 offset-m2 l6 offset-l3">
+									<input class="validate input-font-32px center" type="password" name="password" id="password" />
+									<label for="password" class="input-label">パスワード</label>
+								</div>
+							</div>
+						<div class="row">
+							<button class="btn btn-large waves-effect bold button-style" type="submit">ログイン</button>
+						</div>
+						<input type="hidden" value="$loginType" />
+					</form>
+					<div class="row">
+						#if($failMsg)
+							<div class="col s12">
+								<div class="red lighten-1">
+									<div class="white-text">
+										$failMsg
+									</div>
+								</div>
+							</div>
+						#end
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<br />
+		<div class="row center">
+			<h5>ユーザーIDをお持ちでない方は、<a href="/account/input">こちら</a>から登録</h5>
+		</div>
 </body>
 </html>

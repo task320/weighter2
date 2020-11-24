@@ -1,0 +1,41 @@
+.input-font-32px {
+	font-size: 32px !important;
+}
+
+.input-label{
+	font-size: 24px !important;
+}
+
+.title-sub-font{
+	font-size: 28px;
+}
+
+.button-style{
+	font-size: 28px;
+	width: 300px;
+}
+
+.input-text-style{
+	margin-top: 40px;
+}
+
+.title-margin{
+	margin-top: 40px;
+}
+
+.weight-data table{
+	table-layout: fixed;
+}
+
+.weight-data th{
+	font-size: 28px;
+}
+
+.weight-data td{
+	font-size: 28px;
+}
+
+.weight-data-title{
+	font-size: 28px;
+}
+

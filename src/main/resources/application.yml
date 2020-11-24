@@ -1,8 +1,23 @@
 micronaut:
-  application:
-    name: weighter
-    security:
-      authentication: session
-      redirect:
-        login-success: /
-        login-failure: /login/authFailed
+ application:
+  name: weighter
+ security:
+  authentication: session
+  redirect:
+   login-success: /main
+   login-failure: /login/authFailed
+  intercept-url-map:
+   - pattern: /static/**
+     http-method: GET
+     access:
+      - isAnonymous()
+   - pattern: /main
+     http-method: POST
+     access:
+      - isAnonymous()
+ router:
+  static-resources:
+   default:
+    enabled: true
+    mapping: /static/**
+    paths: classpath:static

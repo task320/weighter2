@@ -1,4 +1,4 @@
-package weighter;
+package weighter.provider;
 
 import edu.umd.cs.findbugs.annotations.Nullable;
 import io.micronaut.http.HttpRequest;
@@ -15,21 +15,28 @@ import org.reactivestreams.Publisher;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 
+import weighter.model.LoginLogic;
+import weighter.model.User;
+
 @Singleton
 public class AuthenticationProviderUserPassword implements AuthenticationProvider {
 
     @Override
     public Publisher<AuthenticationResponse> authenticate(@Nullable HttpRequest<?> httpRequest, AuthenticationRequest<?, ?> authenticationRequest) {
         return Flowable.create(emitter -> {
-            if (authenticationRequest.getIdentity().equals("sherlock") &&
-                    authenticationRequest.getSecret().equals("password")) {
-                UserDetails userDetails = new UserDetails((String) authenticationRequest.getIdentity(), new ArrayList<>());
-                emitter.onNext(userDetails);
-                emitter.onComplete();
-            } else {
+            String userName = authenticationRequest.getIdentity().toString();
+            String password = authenticationRequest.getSecret().toString();
+
+            User user = LoginLogic.Login(userName, password);
+
+            if(user == null) {
                 emitter.onError(new AuthenticationException(new AuthenticationFailed()));
             }
-
+            else {
+                UserDetails userDetails = new UserDetails(user.getId(), new ArrayList<>());
+                emitter.onNext(userDetails);
+                emitter.onComplete();
+            }
         }, BackpressureStrategy.ERROR);
     }
 }

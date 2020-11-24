@@ -1,4 +1,4 @@
-package weighter;
+package weighter.controller;
 
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
@@ -12,9 +12,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import weighter.constants.AttributeName;
+
 @Secured(SecurityRule.IS_ANONYMOUS)
 @Controller("/login")
-public class LoginAuthController {
+public class LoginController {
 
     @Produces(MediaType.TEXT_HTML)
     @Get("/auth")
@@ -27,6 +29,9 @@ public class LoginAuthController {
     @Get("/authFailed")
     @View("auth")
     public Map<String, Object> authFailed() {
-        return Collections.singletonMap("errors", true);
+        Map<String, Object> data = new HashMap<>();
+        data.put(AttributeName.FAIL_MSG.toString(), "ユーザ名、またはパスワードが間違っています。");
+
+        return data;
     }
 }
