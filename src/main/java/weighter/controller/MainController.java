@@ -58,7 +58,9 @@ public class MainController {
     @Post()
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @View("main")
-    public Map<String, Object> insertWeight(HttpRequest<?> request, @Nullable Principal principal) {
+    public Map<String, Object> insertWeight(HttpRequest<?> request, @Nullable Principal principal,
+                                            @Body("registFlg") String regitFlg,
+                                            @Body("weight") String weightValue) {
         String id = principal.getName();
 
         Map<String, Object> data = new HashMap<>();
@@ -69,14 +71,14 @@ public class MainController {
 
         //上書きフラグ
         int registFlg = 0;
-        String strRegistFlg = request.getAttribute(AttributeName.REGIST_FLG).toString();
+        String strRegistFlg = regitFlg;
         if(strRegistFlg != null && !(strRegistFlg.isEmpty()))
             if(strRegistFlg.equals("1"))
                 registFlg = 1;
 
         try {
             // 体重
-            Double weight = ObjectUtil.toDouble(request.getAttribute(AttributeName.WEIGHT));
+            Double weight = ObjectUtil.toDouble(weightValue);
 
             // 今日の体重データを登録
             if (!MainLogic.ProcGateWeightData(id, new Date(), weight, comment, registFlg)) {
