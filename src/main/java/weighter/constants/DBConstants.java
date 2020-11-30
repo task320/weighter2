@@ -14,8 +14,8 @@ public final class DBConstants {
 	public static final String DB_PASS = "";
 */
 
-	public static final String DRIVER_CLASS = "org.postgresql.Driver";
-	public static final String JDBC_URL = "jdbc:postgresql://127.0.0.1:5432/test_db";
-	public static final String DB_USER = "postgre_weighter";
-	public static final String DB_PASS = "testdb";
+	public static final String DRIVER_CLASS = System.getenv("DRIVER_CLASS");
+	public static final String JDBC_URL = System.getenv("JDBC_URL");
+	public static final String DB_USER = System.getenv("DB_USER");
+	public static final String DB_PASS = System.getenv("DB_PASS");
 }
