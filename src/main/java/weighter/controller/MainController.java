@@ -6,23 +6,20 @@ import io.micronaut.http.annotation.*;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.views.View;
-import io.micronaut.session.Session;
 
 import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import static weighter.constants.WeightData.NOTHING_WEIGHT;
 import weighter.constants.AttributeName;
 import weighter.model.MainLogic;
-import weighter.model.User;
 import weighter.util.ObjectUtil;
 
 import javax.annotation.Nullable;
 
-@Secured(SecurityRule.IS_ANONYMOUS)
+@Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/main")
 public class MainController {
     @Produces(MediaType.TEXT_HTML)

@@ -3,9 +3,14 @@ micronaut:
   name: weighter
  security:
   authentication: session
+  endpoints:
+   login:
+    path: /login/auth
   redirect:
    login-success: /main
    login-failure: /login/authFailed
+   unauthorized:
+     url: /login/auth
   intercept-url-map:
    - pattern: /static/**
      http-method: GET

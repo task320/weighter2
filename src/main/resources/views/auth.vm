@@ -7,6 +7,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="/static/js/materialize.js"></script>
+	<script src="/static/js/login_logic.js"></script>
 	<title>ログイン</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
 			<div class="card z-depth-2 grey lighten-4">
 				<div class="card-content">
 					<h5>ユーザーID・パスワードを入力してください</h5>
-					<form action="/login" method="POST">
+					<form action="/login/auth" method="POST" onsubmit="checkBeforeLogin();" id="loginForm" name="loginForm">
 						<div class="row">
 							<div class="input-field input-text-style col s12 m8 offset-m2 l6 offset-l3">
 								<input class="validate input-font-32px center" type="text" name="username" id="username" size="30" />
@@ -34,7 +35,7 @@
 								</div>
 							</div>
 						<div class="row">
-							<button class="btn btn-large waves-effect bold button-style" type="submit">ログイン</button>
+							<button class="btn btn-large waves-effect bold button-style" type="button" onclick="checkBeforeLogin();">ログイン</button>
 						</div>
 						<input type="hidden" value="$loginType" />
 					</form>
@@ -48,6 +49,13 @@
 								</div>
 							</div>
 						#end
+                        <div id="messageNotBlank" class="col s12 display-none">
+                            <div class="red lighten-1">
+                                <div class="white-text">
+                                    ユーザーID・パスワードを入力してください。
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>
